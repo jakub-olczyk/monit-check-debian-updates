@@ -43,6 +43,8 @@ sub check_for_updates {
         ($pkg,$ver,$release) = /Inst (.*?) .*\((.*?) (.*?)\)/;  
         if ($pkg){
             $pkg_count++;
+            # Security updates for Debian
+            $pkg_count += $EXITCODES{CRITICAL} if ($release =~ m/updates/);
         }
     }
     close APT;
